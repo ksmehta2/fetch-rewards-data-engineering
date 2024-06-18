@@ -35,6 +35,36 @@ def get_db_connection():
     finally:
         conn.close()
 
+def ensure_table_exists():
+    """Ensure the user_logins table exists in PostgreSQL."""
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS user_logins(
+        user_id varchar(128),
+        device_type varchar(32),
+        masked_ip varchar(256),
+        masked_device_id varchar(256),
+        locale varchar(32),
+        app_version integer,
+        create_date date
+    );
+    """
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(create_table_query)
+                conn.commit()
+                logging.info("Table user_logins checked/created successfully")
+    except Exception as e:
+        logging.error("Error ensuring table exists in PostgreSQL: %s", e)
+
+def ensure_queue_exists():
+    """Ensure the SQS queue exists."""
+    try:
+        sqs.create_queue(QueueName='login-queue')
+        logging.info("SQS queue 'login-queue' created successfully")
+    except Exception as e:
+        logging.error("Error ensuring SQS queue exists: %s", e)
+
 def get_messages_from_queue():
     """
     Fetch messages from the SQS queue.
@@ -106,6 +136,9 @@ def main():
     Main function to process SQS messages and insert data into PostgreSQL.
     This function orchestrates the entire flow from fetching messages to inserting data.
     """
+    ensure_table_exists()
+    ensure_queue_exists()
+
     messages = get_messages_from_queue()
     if not messages:
         logging.info("No messages received.")
