@@ -1,7 +1,7 @@
 # fetch-rewards-data-engineering
 
 ## Overview
-## This project is designed to demonstrate data processing capabilities using AWS services simulated locally via LocalStack. The script reads messages from an SQS queue, masks PII data, and stores the transformed data in a PostgreSQL database. This setup is particularly useful for data engineering tasks that require handling sensitive information securely and efficiently.
+### This project is designed to demonstrate data processing capabilities using AWS services simulated locally via LocalStack. The script reads messages from an SQS queue, masks PII data, and stores the transformed data in a PostgreSQL database. This setup is particularly useful for data engineering tasks that require handling sensitive information securely and efficiently.
 
 
 ## Project decisions has been added in a separate file named Project Decisions
