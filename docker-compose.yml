@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   localstack:
-    image: localstack/localstack:latest
+    image: fetchdocker/data-takehome-localstack
     platform: linux/amd64
     ports:
       - "4566:4566"

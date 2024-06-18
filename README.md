@@ -23,10 +23,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Step 4: Initialize AWS LocalStack
+Step 4: Ensure Services are Properly Initialized by Running Docker Compose in Foreground
 ```
-docker pull fetchdocker/data-takehome-postgres
-docker pull fetchdocker/data-takehome-localstack
+docker-compose up
 ```
 Step 5: Run the ETL Script to Create the Queue.
 This is to ensure the queue is created before sending messages.
