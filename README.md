@@ -53,7 +53,7 @@ awslocal sqs send-message --queue-url http://localhost:4566/000000000000/login-q
 }'
 ```
 
-Step 7: Run the ETL Script
+Step 7: Run the ETL Script.
 Run the ETL script again to process the messages and insert them into PostgreSQL.
 ```
 python ETL_Script.py
