@@ -23,7 +23,14 @@ Step 4: Initialize AWS LocalStack
 docker pull fetchdocker/data-takehome-postgres
 docker pull fetchdocker/data-takehome-localstack
 ```
-Step 5:Send Sample Messages to AWS Queue 
+Step 5: Run the ETL Script to Create the Queue
+Run the ETL script to ensure the queue is created before sending messages.
+
+```
+python ETL_Script.py
+```
+Step 6: Send Sample Messages to AWS Queue 
+After the queue has been created, send sample messages to the SQS queue.
 ```
 awslocal sqs send-message --queue-url http://localhost:4566/000000000000/login-queue --message-body '{
   "user_id": "67890",
@@ -46,12 +53,13 @@ awslocal sqs send-message --queue-url http://localhost:4566/000000000000/login-q
 }'
 ```
 
-Step 6: Run the ETL Script
+Step 7: Run the ETL Script
+Run the ETL script again to process the messages and insert them into PostgreSQL.
 ```
 python ETL_Script.py
 ```
 
-Step 7: Verify data in PostgreSQL
+Step 8: Verify data in PostgreSQL
 ```
 psql -d postgres -U postgres -p 5433 -h localhost -W
 SELECT * FROM user_logins;
