@@ -59,9 +59,15 @@ Run the ETL script again to process the messages and insert them into PostgreSQL
 python ETL_Script.py
 ```
 
-Step 8: Verify data in PostgreSQL
+Step 8: Verify data in PostgreSQL.
 ```
 psql -d postgres -U postgres -p 5433 -h localhost -W
+```
+
+When prompted, enter the password for the PostgreSQL user, which is 'postgres'.
+
+After logging into PostgreSQL, run:
+```
 SELECT * FROM user_logins;
 ```
 
