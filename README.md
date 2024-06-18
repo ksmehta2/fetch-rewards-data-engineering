@@ -1,4 +1,5 @@
 # fetch-rewards-data-engineering
+## Project decisions has been added in a separate file named Project Decisions
 
 Step 1: Clone the Repository
 ```
@@ -55,5 +56,4 @@ Step 7: Verify data in PostgreSQL
 psql -d postgres -U postgres -p 5433 -h localhost -W
 SELECT * FROM user_logins;
 ```
-
 
